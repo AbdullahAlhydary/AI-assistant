@@ -1,0 +1,102 @@
+PROFESSIONAL FOLDER STRUCTURE EXPLANATION
+
+This folder structure is designed to separate concerns. In a real job, you don't want one giant file that does everything. Instead, you give every file a specific job so that if something breaks, you know exactly where to look.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+1. ROOT FILES (The Foundation)
+═══════════════════════════════════════════════════════════════════════════════
+
+node_modules/
+    Responsibility: A storage room for all external libraries you downloaded 
+                   (like express or dotenv)
+    Project Context: Holds the "engine parts" that allow your code to talk to 
+                    Google Gemini or run a web server
+    Communication: Your code calls tools from here using import statements
+
+
+.env
+    Responsibility: Your Secret Vault for private data like API keys that should 
+                   never be shared
+    Project Context: This is where you safely pasted your Gemini API Key
+    Communication: It talks only to the Config layer via a tool called dotenv
+    Header Example: GEMINI_API_KEY=AIzaSy...
+
+
+package.json
+    Responsibility: The Identity Card of your project. It lists the project name 
+                   and every library it needs to run
+    Project Context: It tells Node.js: "This project needs the cors and express 
+                    libraries to work"
+    Communication: Used by the terminal (npm install) to set up the project
+
+
+server.js
+    Responsibility: The Master Switch or Entry Point. Its only job is to turn on 
+                   the server and connect the different layers
+    Project Context: It starts your backend on Port 5000 and tells it to start 
+                    "listening" for the frontend
+    Communication: Plugs in the Middleware and Routes
+    Header Example: import express from 'express';
+
+
+═══════════════════════════════════════════════════════════════════════════════
+2. THE src FOLDER (The Logic Layers)
+═══════════════════════════════════════════════════════════════════════════════
+
+config/
+    Responsibility: The Organizer. It reads the messy variables from .env and 
+                   turns them into a clean JavaScript object
+    Project Context: It makes the Gemini API key available to the rest of the 
+                    app in a tidy way
+    Communication: Reads from .env; serves the rest of the app
+    Header Example: export const config = { ... };
+
+
+routes/
+    Responsibility: The Map. It defines the URLs (endpoints) that the frontend 
+                   can call
+    Project Context: It tells the server: "If someone sends a POST request to 
+                    /rewrite, send them to the Controller"
+    Communication: Links the Frontend request to the Controller
+    Header Example: router.post('/rewrite', rewriteController);
+
+
+controllers/
+    Responsibility: The Brain. It receives the data from the user, asks the 
+                   Service to process it, and sends the final answer back
+    Project Context: It takes the text the user wants to rewrite and prepares 
+                    the "Response" for the UI
+    Communication: Talks to the Routes (to get requests) and the Service (to 
+                  get AI answers)
+    Header Example: export const handleRewrite = async (req, res) => { ... };
+
+
+services/
+    Responsibility: The Worker. This layer does the "heavy lifting" like talking 
+                   to external APIs
+    Project Context: This is the ONLY place in your code that actually talks to 
+                    Google's Gemini servers
+    Communication: Receives text from the Controller and sends it to the 
+                  Gemini API
+    Header Example: export const geminiService = async (userInput) => { ... };
+
+
+middleware/
+    Responsibility: The Guard. It checks requests BEFORE they reach the Brain to 
+                   ensure they are safe
+    Project Context: It hosts your Rate Limiter to make sure one user doesn't 
+                    spam your AI key 100 times a second
+    Communication: Sits between the Server and the Routes
+    Header Example: const limiter = rateLimit({ ... });
+
+
+═══════════════════════════════════════════════════════════════════════════════
+SUMMARY: The Request Flow "Handshake"
+═══════════════════════════════════════════════════════════════════════════════
+
+Frontend → Route → Middleware → Controller → Service → Gemini API
+                                      ↓
+                                  Response
+                                      ↓
+Frontend ← Route ← Controller ← Service ← Gemini API
