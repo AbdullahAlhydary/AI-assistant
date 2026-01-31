@@ -6,7 +6,7 @@ const genAI = new GoogleGenerativeAI(config.geminiKey);
 
 export const generateRewrittenText = async (userInput) => {
     // Change this line in src/services/geminiService.js
-    const model = genAI.getGenerativeModel({ model: "gemini-robotics-er-1.5-preview" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
     const instruction = `Rewrite the following text to be professional: "${userInput}"`;
 
     // We call generateContent and wait for the result
