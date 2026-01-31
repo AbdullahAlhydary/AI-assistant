@@ -1,42 +1,153 @@
-#root {
-  max-width: 1280px;
+/**
+ * App.css - Main Application Styles
+ * 
+ * This stylesheet contains the core layout and styling for the AI Career Assistant.
+ * It uses CSS custom properties (variables) could be added for theming.
+ * 
+ * Color Palette:
+ * - Primary Background: #0f172a (dark navy)
+ * - Secondary Background: #1e293b (slate)
+ * - Accent: #667eea (purple-blue gradient)
+ * - Text Primary: #f1f5f9 (light gray)
+ * - Text Secondary: #94a3b8 (muted gray)
+ */
+
+/* ===== App Container Styles ===== */
+/* Main wrapper that fills the entire viewport */
+.app {
+  min-height: 100vh;
+  width: 100%;
+  /* Ensure full width coverage */
+  display: flex;
+  align-items: center;
+  /* Vertical centering */
+  justify-content: center;
+  /* Horizontal centering */
+  padding: 2rem 1rem;
+  /* Gradient background with fixed attachment for parallax effect */
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+  background-attachment: fixed;
+  box-sizing: border-box;
+  /* Include padding in width calculation */
+}
+
+/* Centered content container with max-width for readability */
+.app-container {
+  width: 100%;
+  max-width: 700px;
+  /* Increased from 600px for better fill */
   margin: 0 auto;
+  /* Center horizontally */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  /* Consistent spacing between sections */
+}
+
+/* ===== Main Content Layout ===== */
+/* Wrapper for the input and output sections */
+.main-content {
+  width: 100%;
+  /* Take full width of container */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Input section card - contains textarea, dropdown, and button */
+.input-section {
+  width: 100%;
+  /* Full width within container */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Stretch children to fill width */
+  gap: 1.25rem;
+  /* Space between form elements */
   padding: 2rem;
+  /* Glassmorphism effect with semi-transparent background */
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(10px);
+  /* Blur effect for glass look */
+  border: 1px solid #334155;
+  border-radius: 20px;
+  /* Soft shadow for depth */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+}
+
+/* Output section - contains error messages and result cards */
+.output-section {
+  width: 100%;
+  /* Full width within container */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ===== Footer Styles ===== */
+/* Simple footer with branding text */
+.footer {
+  width: 100%;
   text-align: center;
+  padding-top: 1rem;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.footer p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #64748b;
+  /* Muted text color */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+/* ===== Responsive Design ===== */
+/* Tablet breakpoint - slightly reduce padding */
+@media (max-width: 768px) {
+  .app-container {
+    max-width: 100%;
+    /* Use full width on smaller screens */
+    padding: 0 0.5rem;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+/* Mobile breakpoint - compact layout for small screens */
+@media (max-width: 640px) {
+  .app {
+    padding: 1rem 0.75rem;
+    align-items: flex-start;
+    /* Align to top on mobile */
+    padding-top: 2rem;
+  }
+
+  .app-container {
+    gap: 1rem;
+  }
+
+  .input-section {
+    padding: 1.5rem;
+    border-radius: 16px;
   }
 }
 
-.card {
-  padding: 2em;
+/* ===== Scrollbar Styles ===== */
+/* Custom scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-.read-the-docs {
-  color: #888;
+::-webkit-scrollbar-track {
+  background: #1e293b;
+  /* Track background color */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #475569;
+  /* Scrollbar thumb color */
+  border-radius: 4px;
+  /* Rounded corners */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+  /* Lighter on hover */
 }

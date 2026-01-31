@@ -1,0 +1,97 @@
+/**
+ * LengthSelector Component Styles
+ * 
+ * Styles for the dropdown component that allows users to select
+ * the desired length of the AI-rewritten text.
+ */
+
+/* ===== Container Styles ===== */
+/* Wrapper for the entire length selector component */
+.length-selector-container {
+    width: 100%;
+}
+
+/* ===== Label Styles ===== */
+/* Label text above the dropdown */
+.length-selector-label {
+    display: block;
+    text-align: left;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    margin-bottom: 0.5rem;
+}
+
+/* ===== Dropdown Wrapper ===== */
+/* Relative positioning for the custom arrow icon */
+.length-selector-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* ===== Select Element Styles ===== */
+/* Main dropdown styling */
+.length-selector {
+    width: 100%;
+    padding: 0.875rem 2.5rem 0.875rem 1rem;
+    /* Extra right padding for arrow */
+    font-size: 1rem;
+    font-family: inherit;
+    color: #f1f5f9;
+    background-color: #1e293b;
+    border: 2px solid #334155;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    /* Remove default browser arrow */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/* ===== Hover State ===== */
+.length-selector:hover:not(:disabled) {
+    border-color: #475569;
+}
+
+/* ===== Focus State ===== */
+/* Purple glow effect when focused for visual feedback */
+.length-selector:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+/* ===== Disabled State ===== */
+/* Reduced opacity when the component is disabled */
+.length-selector:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ===== Dropdown Options Styling ===== */
+/* Style for the dropdown menu options */
+.length-selector option {
+    background-color: #1e293b;
+    color: #f1f5f9;
+    padding: 0.5rem;
+}
+
+/* ===== Custom Arrow Icon ===== */
+/* Positioned absolutely within the wrapper */
+.length-selector-arrow {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    pointer-events: none;
+    /* Allows clicks to pass through to select */
+    transition: color 0.2s ease;
+}
+
+/* Arrow color change on hover */
+.length-selector-wrapper:hover .length-selector-arrow {
+    color: #e2e8f0;
+}
